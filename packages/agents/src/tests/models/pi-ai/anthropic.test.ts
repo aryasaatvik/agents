@@ -48,7 +48,11 @@ describe("pi-ai: Anthropic Messages over the universal gateway", () => {
   it("parses a text stream in the live event shape", async () => {
     const binding = fakeBinding(() =>
       sseEventResponse(anthropicTextEvents(), {
-        headers: { "cf-aig-log-id": "log-a", "cf-aig-trace-id": "trace-a" }
+        headers: {
+          "cf-aig-log-id": "log-a",
+          "cf-aig-trace-id": "trace-a",
+          "cf-ray": "a509baf4-SJC"
+        }
       })
     );
     const ai = createAI({ binding: asAi(binding) });
@@ -73,6 +77,7 @@ describe("pi-ai: Anthropic Messages over the universal gateway", () => {
       logId: "log-a",
       model: "claude-sonnet-4-5",
       provider: "anthropic",
+      ray: "a509baf4-SJC",
       traceId: "trace-a"
     });
   });
@@ -236,7 +241,10 @@ describe("pi-ai: Anthropic Messages over the universal gateway", () => {
           error: { message: "overloaded", type: "overloaded_error" },
           type: "error"
         },
-        { headers: { "cf-aig-log-id": "log-529" }, status: 529 }
+        {
+          headers: { "cf-aig-log-id": "log-529", "cf-ray": "a509b796-HKG" },
+          status: 529
+        }
       )
     );
     const ai = createAI({ binding: asAi(binding) });
@@ -247,6 +255,10 @@ describe("pi-ai: Anthropic Messages over the universal gateway", () => {
     expect(
       message.diagnostics?.find((d) => d.type === "cloudflare-error")?.details
     ).toMatchObject({ logId: "log-529", status: 529 });
+    // A refused call still names the data center that answered it.
+    expect(
+      message.diagnostics?.find((d) => d.type === "cloudflare")?.details
+    ).toMatchObject({ logId: "log-529", ray: "a509b796-HKG" });
   });
 
   it("asks for the fine-grained beta only when the model declares it", async () => {

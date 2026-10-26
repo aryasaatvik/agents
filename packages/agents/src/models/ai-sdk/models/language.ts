@@ -74,6 +74,8 @@ export interface CloudflareMetadata {
   cacheStatus?: string;
   /** `cf-aig-step` — which step of a gateway route answered. */
   step?: number;
+  /** `cf-ray` — its suffix names the Cloudflare data center that answered. */
+  ray?: string;
 }
 
 /** Everything a language model needs from the provider that created it. */
@@ -125,7 +127,8 @@ export function cloudflareMetadata(
     ["eventId", "cf-aig-event-id"],
     ["requestId", "cf-aig-request-id"],
     ["runId", "cf-aig-run-id"],
-    ["traceId", "cf-aig-trace-id"]
+    ["traceId", "cf-aig-trace-id"],
+    ["ray", "cf-ray"]
   ] as const) {
     const value = headers.get(header);
     if (value !== null) metadata[field] = value;

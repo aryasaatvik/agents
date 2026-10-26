@@ -565,7 +565,8 @@ describe("provider metadata", () => {
       provider: "anthropic",
       requestId: "7bfd3660-9d0f-4bf7-bf9b-fa90b860456f",
       step: 0,
-      traceId: "2babd9bbb1984dfc90417e513c60a714"
+      traceId: "2babd9bbb1984dfc90417e513c60a714",
+      ray: "a509baf42f7b2994-SJC"
     });
     // Anthropic's own block is still there.
     expect(result.providerMetadata?.anthropic).toBeDefined();

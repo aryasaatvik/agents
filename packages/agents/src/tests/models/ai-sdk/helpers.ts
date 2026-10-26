@@ -225,6 +225,7 @@ export function gatewayHeaders(
     "cf-aig-request-id": "7bfd3660-9d0f-4bf7-bf9b-fa90b860456f",
     "cf-aig-step": "0",
     "cf-aig-trace-id": "2babd9bbb1984dfc90417e513c60a714",
+    "cf-ray": "a509baf42f7b2994-SJC",
     ...overrides
   };
 }

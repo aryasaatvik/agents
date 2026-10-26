@@ -508,22 +508,24 @@ providerMetadata?.cloudflare;
 //   requestId: "7bfd3660-9d0f-4bf7-bf9b-fa90b860456f",
 //   traceId: "2babd9bbb1984dfc90417e513c60a714",
 //   cacheStatus: "MISS",
-//   step: 0
+//   step: 0,
+//   ray: "a509baf42f7b2994-SJC"
 // }
 ```
 
-| Field         | Source header         | Notes                                          |
-| ------------- | --------------------- | ---------------------------------------------- |
-| `model`       | —                     | The leg that answered, after any fallback.     |
-| `gateway`     | —                     | The gateway id, when one handled the request.  |
-| `provider`    | —                     | The gateway provider slug, for a model object. |
-| `logId`       | `cf-aig-log-id`       | Falls back to the binding's last log id.       |
-| `eventId`     | `cf-aig-event-id`     | Correlates the requests of one gateway event.  |
-| `requestId`   | `cf-aig-request-id`   | The gateway's id for this request.             |
-| `traceId`     | `cf-aig-trace-id`     | The trace this request belongs to.             |
-| `runId`       | `cf-aig-run-id`       | Present only when the gateway sends one.       |
-| `cacheStatus` | `cf-aig-cache-status` | `HIT` / `MISS`.                                |
-| `step`        | `cf-aig-step`         | Which step of a gateway route answered.        |
+| Field         | Source header         | Notes                                           |
+| ------------- | --------------------- | ----------------------------------------------- |
+| `model`       | —                     | The leg that answered, after any fallback.      |
+| `gateway`     | —                     | The gateway id, when one handled the request.   |
+| `provider`    | —                     | The gateway provider slug, for a model object.  |
+| `logId`       | `cf-aig-log-id`       | Falls back to the binding's last log id.        |
+| `eventId`     | `cf-aig-event-id`     | Correlates the requests of one gateway event.   |
+| `requestId`   | `cf-aig-request-id`   | The gateway's id for this request.              |
+| `traceId`     | `cf-aig-trace-id`     | The trace this request belongs to.              |
+| `runId`       | `cf-aig-run-id`       | Present only when the gateway sends one.        |
+| `cacheStatus` | `cf-aig-cache-status` | `HIT` / `MISS`.                                 |
+| `step`        | `cf-aig-step`         | Which step of a gateway route answered.         |
+| `ray`         | `cf-ray`              | Its suffix names the data center that answered. |
 
 Every field except `model` is optional, and which ones arrive
 depends on the path and the call. Read the fields you find rather than assuming

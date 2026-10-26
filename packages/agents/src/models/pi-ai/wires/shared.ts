@@ -184,6 +184,8 @@ export interface ResponseCorrelation {
   step?: string;
   eventId?: string;
   traceId?: string;
+  /** `cf-ray` — its suffix names the Cloudflare data center that answered. */
+  ray?: string;
 }
 
 export function correlationOf(
@@ -197,7 +199,8 @@ export function correlationOf(
     logId: get("cf-aig-log-id") ?? transport.logIdFallback(response),
     runId: get("cf-aig-run-id"),
     step: get("cf-aig-step"),
-    traceId: get("cf-aig-trace-id")
+    traceId: get("cf-aig-trace-id"),
+    ray: get("cf-ray")
   };
 }
 

@@ -316,7 +316,7 @@ const cloudflare = message.diagnostics?.find(
   (d) => d.type === "cloudflare"
 )?.details;
 // { model, gateway, provider?, specifier?, logId?, eventId?, cacheStatus?,
-//   step?, traceId?, runId? }
+//   step?, traceId?, runId?, ray? }
 ```
 
 A failed dispatch ends the stream with an `error` event whose message carries a
